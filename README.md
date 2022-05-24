@@ -13,3 +13,6 @@ Each folder groups a single example as follows:
 - [Writing Tests with JUnit 5](https://www.youtube.com/watch?v=we3zJE3hlWE)
 - [Spring Boot Test Slices: Overview and Usage](https://rieckpil.de/spring-boot-test-slices-overview-and-usage/)
 - [Testing the Web Layer](https://spring.io/guides/gs/testing-web/)
+- [Mocking Void Methods with Mockito](https://www.baeldung.com/mockito-void-methods)
+- [Testing with Spring Boot and @SpringBootTest](https://reflectoring.io/spring-boot-test/)
+- [How to Test a Spring Boot Application](https://stackabuse.com/how-to-test-a-spring-boot-application/)
