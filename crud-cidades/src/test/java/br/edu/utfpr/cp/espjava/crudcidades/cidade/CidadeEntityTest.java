@@ -1,5 +1,6 @@
 package br.edu.utfpr.cp.espjava.crudcidades.cidade;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
@@ -8,26 +9,28 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 @DataJpaTest
-public class TestCidade {
+public class CidadeEntityTest {
 
     @Autowired
     private TestEntityManager entityManager;
-    
+
     @Test
     public void testNewInstance() {
-        var cidade = new Cidade("São Paulo", "SP");
+        var cidade = new CidadeEntidade();
         assertNotNull(cidade);
     }
 
     @Test
-    public void testClonar() {
-
-        var cidade = new Cidade("São Paulo", "SP");
-        var cidadeEntidade = cidade.clonar();
+    public void testValidEntity() {
+        var cidade = new CidadeEntidade();
+        cidade.setNome("São Paulo");
+        cidade.setEstado("SP");
         
-        assertNotNull(cidadeEntidade);
-        
-        var cidadePersisted = entityManager.persist(cidadeEntidade);
+        var cidadePersisted = entityManager.persist(cidade);
+        assertEquals("São Paulo", cidadePersisted.getNome());
+        assertEquals("SP", cidadePersisted.getEstado());
         assertNotNull(cidadePersisted.getId());
     }
+
+    
 }
