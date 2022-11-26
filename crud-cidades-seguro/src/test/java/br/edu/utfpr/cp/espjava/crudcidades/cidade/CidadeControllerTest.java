@@ -12,12 +12,15 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.mock.web.MockRequestDispatcher;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 
-@WebMvcTest
+@SpringBootTest
+@AutoConfigureMockMvc
 public class CidadeControllerTest {
     
     @MockBean
@@ -47,7 +50,28 @@ public class CidadeControllerTest {
     }
 
     @Test
+    public void criarSemAutorizacao() throws Exception {
+        
+        mockMvc
+            .perform(
+                post("/criar")
+                    .param("nome", "abcde")
+                    .param("estado", "ae"))
+            .andExpect(status().isUnauthorized());
+
+        mockMvc
+            .perform(
+                post("/criar")
+                    .param("nome", "abcde")
+                    .param("estado", "ae")
+                    .with(SecurityMockMvcRequestPostProcessors.httpBasic("user", "ttttt")))
+            .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @WithMockUser(username = "user", password = "test123", roles = {"USER"})
     public void criar() throws Exception {
+                
         mockMvc
             .perform(
                 post("/criar")
@@ -58,6 +82,7 @@ public class CidadeControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "user", password = "test123", roles = {"USER"})
     public void criarInvalidAttributeNomeSizeMin() throws Exception {
         mockMvc
             .perform(
@@ -71,6 +96,7 @@ public class CidadeControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "user", password = "test123", roles = {"USER"})
     public void criarInvalidAttributeNomeSizeMax() throws Exception {
         mockMvc
             .perform(
@@ -84,6 +110,7 @@ public class CidadeControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "user", password = "test123", roles = {"USER"})
     public void criarInvalidAttributeNomeBlank() throws Exception {
         mockMvc
             .perform(
@@ -97,6 +124,7 @@ public class CidadeControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "user", password = "test123", roles = {"USER"})
     public void criarInvalidAttributeEstadoSizeMax() throws Exception {
         mockMvc
             .perform(
@@ -110,6 +138,7 @@ public class CidadeControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "user", password = "test123", roles = {"USER"})
     public void criarInvalidAttributeEstadoSizeMin() throws Exception {
         mockMvc
             .perform(
@@ -123,6 +152,7 @@ public class CidadeControllerTest {
     }    
 
     @Test
+    @WithMockUser(username = "user", password = "test123", roles = {"USER"})
     public void criarInvalidAttributeEstadoBlank() throws Exception {
         mockMvc
             .perform(
@@ -136,6 +166,35 @@ public class CidadeControllerTest {
     }
     
     @Test
+    public void excluirSemAutorizacao() throws Exception {
+
+        mockMvc
+            .perform(
+                get("/excluir")
+                    .param("nome", "São Paulo")
+                    .param("estado", "SP"))
+            .andExpect(status().isUnauthorized());
+
+        mockMvc
+            .perform(
+                get("/excluir")
+                    .param("nome", "São Paulo")
+                    .param("estado", "SP")
+                    .with(SecurityMockMvcRequestPostProcessors.httpBasic("user", "ttttt")))
+            .andExpect(status().isUnauthorized());
+
+        mockMvc
+            .perform(
+                get("/excluir")
+                    .param("nome", "São Paulo")
+                    .param("estado", "SP")
+                    .with(SecurityMockMvcRequestPostProcessors.httpBasic("user", "test123")))
+            .andExpect(status().isForbidden());
+            
+    }
+
+    @Test
+    @WithMockUser(username = "admin", password = "test123", roles = {"ADMIN"})
     public void excluir() throws Exception {
 
         mockMvc
