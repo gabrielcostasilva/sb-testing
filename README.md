@@ -6,7 +6,7 @@ Each folder groups a single example as follows:
 
 - [_rest_](./rest/) shows the foundation of a REST testing.
 - [_crud-cidades_](./crud-cidades/) presents tests for an entire Web MVC app stack.
-- [_crud-cidades-seguro_](./crud-cidades-seguro/) apply tests to a WebMVC app.
+- [_crud-cidades-seguro_](./crud-cidades-seguro/) applies tests to a WebMVC app.
 - [_GUI integration_](https://github.com/gabrielcostasilva/crud-cidades/tree/selenide-crud) uses [Selenide](https://selenide.org) to test the CRUD-cidades web app integration with GUI. **Note** that this project is in another repository.
 - [_reactive testing_](https://github.com/gabrielcostasilva/reactivity-examples/tree/testing) shows how to test the entire stack of a reactive Web application with Spring Boot. **Note** that this project is in another repository.
 - [_testing-contract_](https://github.com/gabrielcostasilva/reactivity-examples/tree/testing-contract) shows how to use consumer-driven contract testing to ensure that client/service (consumer/provider) agrees with a common interface. **Note** that this project is in another repository.
