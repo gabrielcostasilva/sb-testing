@@ -12,6 +12,8 @@ Each folder groups a single example as follows:
 - [_testing-contract_](https://github.com/gabrielcostasilva/reactivity-examples/tree/testing-contract) shows how to use consumer-driven contract testing to ensure that client/service (consumer/provider) agrees with a common interface. **Note** that this project is in another repository.
 
 ## Useful References
+- [Spring Boot Testing - ** Batteries Included](https://youtu.be/rUbjV3VY1DI?si=PYAZtxQgOY8k7dmb) is a 2023 reference on Spring Boot testing features, including MockMvc, JSon, and assertion libraries.
+
 - Quick intro to unit testing the entire app stack with [Spring Tips: Bootiful testing](https://www.youtube.com/watch?v=lTSJCr7xdbM)
 - [Official Spring reference on testing](https://docs.spring.io/spring-framework/docs/current/reference/html/testing.html)
 - [Writing Tests with JUnit 5](https://www.youtube.com/watch?v=we3zJE3hlWE)
